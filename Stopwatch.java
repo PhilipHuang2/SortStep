@@ -16,7 +16,7 @@ public class Stopwatch {
     /* uses System.out to display the elapsed time in seconds */
   {
     long elapse = stop - start; 
-    return elapse/1000000000;
+    return elapse;
   }
   public void reset()
     /* resets the elapsed time to 0 */

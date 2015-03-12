@@ -9,17 +9,29 @@ public class Sorts
       for(int inner = 0; inner < list.length-outer -1; inner++)
       {
         if(list[inner] > list[inner +1] )
+        {
           int temp = list[inner];
           list[inner] = list[inner + 1];
           list[inner + 1] = temp; 
-      }
+        }
+      }  
     }
-
   }
-
   public void selectionSort(int[] list)
   {
-    //your code here
+    int flag, nTemp;
+    for(int outer = 0; outer < list.length-1; outer++)
+    {
+      flag = outer;
+      for(int inner = 0; inner < list.length-1; inner++)
+      {
+        if(list[inner] < list[flag])
+          flag = inner;
+      }
+      nTemp = list[outer];
+      list[outer] = list[flag];
+      list[flag] = nTemp;
+    }
   }
 
   public void insertionSort(int[] list)
