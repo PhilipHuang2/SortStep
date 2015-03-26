@@ -23,7 +23,7 @@ public class Sorts
     for(int outer = 0; outer < list.length-1; outer++)
     {
       flag = outer;
-      for(int inner = 0; inner < list.length-1; inner++)
+      for(int inner = outer+ 1; inner < list.length; inner++)
       {
         if(list[inner] < list[flag])
           flag = inner;
@@ -36,17 +36,47 @@ public class Sorts
 
   public void insertionSort(int[] list)
   {
-    //your code here
+    for (int outer = 1; outer < list.length; outer++) {
+      int position = outer;
+      int key  = list[position];
+      while(position > 0 && list[position -1] > key)
+      {
+        list[position] = list[position-1];
+        position--;
+      }
+      list[position] = key;
+    }
   }
 
   private void merge(int[] a, int first, int mid, int last)
   {
-    //your code here
+     int[] sorted = new int[ last - first + 1];
+      int nA = 0; int nB = 0;
+      for(int c = 0; c < sorted.length;c++)
+      { 
+        if(nA > mid - first)
+          {sorted[c] = a[mid + 1 + nB]; nB++;}
+        else if(nB > last - mid)
+          {sorted[c] = a[first + nA]; nA++;}
+        else if(a[first + nA] > a[mid + 1 + nB])
+          {sorted[c] = a[mid + 1 + nB]; nB++;}
+        else
+          {sorted[c] = a[first + nA]; nA++;}
+      }
+
   }
 
   public void mergeSort(int[] a, int first, int last)
   {
-    //your code here
+     //declare and initialize
+     int mid = (first + last)/2;
+     if(first  < last) //more than one element
+     {
+        mergeSort(a, first, mid ); //first half
+        mergeSort(a, mid , last); //second half
+     } 
+     merge(a, first, mid , last);
+
   }
 }
 

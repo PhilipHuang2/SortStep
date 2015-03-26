@@ -20,6 +20,11 @@ public void selectionSortTest()
   watch.reset();
   watch.start();
   mySorts.selectionSort(myArray);
+  if(isSorted() == false)
+  {
+    System.out.println("Sort not working");
+    return;
+  }
   watch.stop();
   System.out.println("Selection Sort took " +watch.elapsedTime()/1000 + " microseconds");
 }
@@ -30,6 +35,11 @@ public void bubbleSortTest()
   watch.reset();
   watch.start();
   mySorts.bubbleSort(myArray);
+  if(isSorted() == false)
+  {
+    System.out.println("Sort not working");
+    return;
+  }
   watch.stop();
   System.out.println("Bubble Sort took " +watch.elapsedTime()/1000 + " microseconds");
 }
@@ -40,6 +50,11 @@ public void insertionSortTest()
   watch.reset();
   watch.start();
   mySorts.insertionSort(myArray);
+  if(isSorted() == false)
+  {
+    System.out.println("Sort not working");
+    return;
+  }
   watch.stop();
   System.out.println("Insertion Sort took " +watch.elapsedTime()/1000 + " microseconds");
 }
@@ -50,6 +65,11 @@ public void mergeSortTest()
   watch.reset();
   watch.start();
   mySorts.mergeSort(myArray,0,myArray.length-1);
+  if(isSorted() == false)
+  {
+    System.out.println("Sort not working");
+    return;
+  }
   watch.stop();
   System.out.println("Merge Sort took " +watch.elapsedTime()/1000 + " microseconds");
 }
@@ -60,4 +80,10 @@ private void fillArray(int numInts, int largestInt)
     myArray[loop] = (int)(Math.random()*largestInt + 1);
   }
 }
-
+private boolean isSorted()
+{
+  for(int i = 0; i < myArray.length-1; i++)
+    if(myArray[i] > myArray[i+1])
+      return false;
+  return true;
+}
