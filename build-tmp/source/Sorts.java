@@ -50,29 +50,39 @@ public class Sorts
 
   private void merge(int[] a, int first, int mid, int last)
   {
-   int[] half = new int[mid - first];
-   int[] half2 = new int[last - mid+1];
-   for(int c = 0; c < half.length; c++)
-   { half[c] = a[first + c]; }
-   for (int c = 0; c < half2.length; c++ ) 
-   {half2[c] = a[mid+1+c]; }
-   int nA= 0; int nB = 0;
-   for(int c = 0; c < a.length; c++)
-   {
-     if(nA > half.length) {a[c] = half2[nB]; nB++;}
-     else if(nB > half2.length) {a[c] = half[nA]; nA++;}
-     else if(half[nA] > half2[nB]) {a[c] = half2[nB]; nB++;}
-     else {a[c] = half[nA]; nA++;}
-   }   
+     int[] sorted = new int[ last - first + 1];
+      int nA = first; int nB = mid +1;
+      for(int c = 0; c < sorted.length;c++)
+      { 
+        if(nA > mid)
+          {sorted[c] = a[nB]; nB++;}
+        else if(nB > last)
+          {sorted[c] = a[nA]; nA++;}
+        else if(a[nA] > a[nB])
+          {sorted[c] = a[nB]; nB++;}
+        else
+          {sorted[c] = a[nA]; nA++;}
+      }
+      int control = 0;
+      for(int n = first; n <= last; n++)
+      {
+        a[n] = sorted[control];
+        control++;
+      }
+
   }
 
   public void mergeSort(int[] a, int first, int last)
   {
-    /*int start = 0;
-    int end = list.length-1;
-    int middle = (start + end)/2;
-    int[] firstHalf = a[];
-    */
+     //declare and initialize
+     int mid = (first + last)/2;
+     if(first  < last) //more than one element
+     {
+        mergeSort(a, first, mid ); //first half
+        mergeSort(a, mid +1 , last); //second half
+     } 
+     merge(a, first, mid , last);
+
   }
 }
 

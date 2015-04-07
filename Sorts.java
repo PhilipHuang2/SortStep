@@ -51,17 +51,23 @@ public class Sorts
   private void merge(int[] a, int first, int mid, int last)
   {
      int[] sorted = new int[ last - first + 1];
-      int nA = 0; int nB = 0;
+      int nA = first; int nB = mid +1;
       for(int c = 0; c < sorted.length;c++)
       { 
-        if(nA > mid - first)
-          {sorted[c] = a[mid + 1 + nB]; nB++;}
-        else if(nB > last - mid)
-          {sorted[c] = a[first + nA]; nA++;}
-        else if(a[first + nA] > a[mid + 1 + nB])
-          {sorted[c] = a[mid + 1 + nB]; nB++;}
+        if(nA > mid)
+          {sorted[c] = a[nB]; nB++;}
+        else if(nB > last)
+          {sorted[c] = a[nA]; nA++;}
+        else if(a[nA] > a[nB])
+          {sorted[c] = a[nB]; nB++;}
         else
-          {sorted[c] = a[first + nA]; nA++;}
+          {sorted[c] = a[nA]; nA++;}
+      }
+      int control = 0;
+      for(int n = first; n <= last; n++)
+      {
+        a[n] = sorted[control];
+        control++;
       }
 
   }
@@ -73,7 +79,7 @@ public class Sorts
      if(first  < last) //more than one element
      {
         mergeSort(a, first, mid ); //first half
-        mergeSort(a, mid , last); //second half
+        mergeSort(a, mid +1 , last); //second half
      } 
      merge(a, first, mid , last);
 
